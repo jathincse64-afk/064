@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeSync | Personal Life Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+            <div>LifeSync<span>PERSONAL MANAGER</span></div>
+        </div>
+
+        <p class="nav-label">WORKSPACE</p>
+        <button class="nav-item active" data-section="dashboard">◫ Dashboard</button>
+        <button class="nav-item" data-section="schedule">▦ My Schedule</button>
+        <button class="nav-item" data-section="health">♡ Health Tracker</button>
+
+        <p class="nav-label">PREFERENCES</p>
+        <button class="nav-item" data-section="settings">⚙ Settings</button>
+
+        <div class="sidebar-bottom">
+            <div class="profile-avatar">L</div>
+            <div>
+                <strong>My Life</strong>
+                <small>Personal account</small>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div>
+                <div class="eyebrow">YOUR PERSONAL SPACE</div>
+                <h1 id="greeting">Good day!</h1>
+                <p id="currentDate"></p>
+            </div>
+            <div class="top-actions">
+                <div class="clock" id="clock">00:00:00</div>
+                <button class="icon-btn" id="enableNotifications" title="Enable notifications">♧</button>
+                <button class="primary-btn" id="openModal">＋ Add Activity</button>
+            </div>
+        </header>
+
+        <section id="dashboard" class="page-section">
+            <div class="welcome-banner">
+                <div>
+                    <span class="banner-tag">YOUR DAY, YOUR CONTROL</span>
+                    <h2>Make today count.</h2>
+                    <p>Small habits. Consistent progress. A better you.</p>
+                    <button class="banner-btn" id="bannerAdd">＋ Plan an activity</button>
+                </div>
+                <div class="banner-art">✧</div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Today's overview</h2>
+                    <p>Stay focused on what matters.</p>
+                </div>
+                <span class="live-tag">● LIVE TRACKING</span>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <div class="stat-top"><span>Activities</span><span class="stat-icon purple">▦</span></div>
+                    <h2 id="totalTasks">0</h2>
+                    <p>Total planned today</p>
+                    <div class="progress-track"><div id="taskProgress" class="progress-fill purple-fill"></div></div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div>
+                    <h2 id="completedTasks">0</h2>
+                    <p>Activities completed</p>
+                    <div class="progress-track"><div id="completedProgress" class="progress-fill green-fill"></div></div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top"><span>Water intake</span><span class="stat-icon blue">♧</span></div>
+                    <h2><span id="waterValue">0</span><small> ml</small></h2>
+                    <p>Daily target: <span id="waterTargetLabel">2000</span> ml</p>
+                    <div class="progress-track"><div id="waterProgress" class="progress-fill blue-fill"></div></div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top"><span>Exercise</span><span class="stat-icon orange">⌁</span></div>
+                    <h2><span id="exerciseValue">0</span><small> min</small></h2>
+                    <p>Exercise completed today</p>
+                    <div class="progress-track"><div id="exerciseProgress" class="progress-fill orange-fill"></div></div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <section class="panel schedule-panel">
+                    <div class="panel-heading">
+                        <div><h2>Today's schedule</h2><p>Your upcoming activities</p></div>
+                        <button class="text-btn" data-go="schedule">View all →</button>
+                    </div>
+                    <div id="todayTasks" class="task-list"></div>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-heading">
+                        <div><h2>Daily wellness</h2><p>Keep your body hydrated</p></div>
+                        <span class="water-icon">♧</span>
+                    </div>
+                    <div class="water-circle" id="waterCircle">
+                        <div><strong id="waterPercent">0%</strong><span>of daily goal</span></div>
+                    </div>
+                    <p class="center muted">Water consumed today</p>
+                    <div class="water-actions">
+                        <button class="water-btn" data-water="250">+250 ml</button>
+                        <button class="water-btn" data-water="500">+500 ml</button>
+                    </div>
+                    <button class="outline-btn full-btn" id="resetWater">Reset water intake</button>
+                </section>
+            </div>
+        </section>
+
+        <section id="schedule" class="page-section hidden">
+            <div class="section-heading">
+                <div><h2>My Schedule</h2><p>Manage your daily activities and reminders.</p></div>
+                <button class="primary-btn" id="scheduleAdd">＋ New Activity</button>
+            </div>
+            <div class="panel">
+                <div class="filter-row">
+                    <input type="date" id="filterDate">
+                    <select id="filterCategory">
+                        <option value="all">All categories</option>
+                        <option value="work">Work</option>
+                        <option value="exercise">Exercise</option>
+                        <option value="food">Food</option>
+                        <option value="water">Water</option>
+                        <option value="personal">Personal</option>
+                    </select>
+                </div>
+                <div id="allTasks" class="task-list"></div>
+            </div>
+        </section>
+
+        <section id="health" class="page-section hidden">
+            <div class="section-heading">
+                <div><h2>Health Tracker</h2><p>Build healthier daily habits.</p></div>
+            </div>
+            <div class="health-grid">
+                <div class="panel">
+                    <span class="stat-icon blue">♧</span>
+                    <h2>Water intake</h2>
+                    <p class="muted">Record the water you drink.</p>
+                    <h1><span id="healthWater">0</span> ml</h1>
+                    <button class="primary-btn" data-water="250">＋ Add 250 ml</button>
+                </div>
+                <div class="panel">
+                    <span class="stat-icon orange">⌁</span>
+                    <h2>Exercise tracker</h2>
+                    <p class="muted">Record your completed exercise.</p>
+                    <h1><span id="healthExercise">0</span> min</h1>
+                    <button class="primary-btn" id="addExercise">＋ Add exercise</button>
+                </div>
+                <div class="panel">
+                    <span class="stat-icon green">♡</span>
+                    <h2>Healthy meals</h2>
+                    <p class="muted">Schedule meals and stay consistent.</p>
+                    <button class="primary-btn" id="addMeal">＋ Schedule a meal</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="settings" class="page-section hidden">
+            <div class="section-heading"><div><h2>Settings</h2><p>Personalize your daily targets.</p></div></div>
+            <div class="panel settings-panel">
+                <label>Daily water target (ml)
+                    <input type="number" id="waterTarget" min="250" max="10000" value="2000">
+                </label>
+                <label>Exercise target (minutes)
+                    <input type="number" id="exerciseTarget" min="1" max="600" value="30">
+                </label>
+                <button class="primary-btn" id="saveSettings">Save preferences</button>
+                <p class="muted">Your information is saved locally in this browser.</p>
+            </div>
+        </section>
+
+        <footer>LifeSync © 2026 · Plan better. Live better.</footer>
+    </main>
+</div>
+
+<!-- ACTIVITY MODAL -->
+<div class="modal-overlay" id="activityModal">
+    <div class="modal">
+        <div class="modal-heading">
+            <div><span class="eyebrow">PERSONAL PLANNER</span><h2 id="modalTitle">Create activity</h2></div>
+            <button class="close-btn" id="closeModal">×</button>
+        </div>
+
+        <form id="activityForm">
+            <input type="hidden" id="editId">
+
+            <label>Activity name
+                <input type="text" id="activityName" placeholder="e.g. Morning workout" required maxlength="70">
+            </label>
+
+            <div class="form-row">
+                <label>Category
+                    <select id="activityCategory">
+                        <option value="personal">Personal</option>
+                        <option value="work">Work</option>
+                        <option value="exercise">Exercise</option>
+                        <option value="food">Food / Meal</option>
+                        <option value="water">Water</option>
+                    </select>
+                </label>
+                <label>Date
+                    <input type="date" id="activityDate" required>
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label>Activity time
+                    <input type="time" id="activityTime" required>
+                </label>
+                <label>Duration (minutes)
+                    <input type="number" id="activityDuration" min="1" placeholder="30">
+                </label>
+            </div>
+
+            <label>Notes
+                <textarea id="activityNotes" placeholder="Add details about this activity..."></textarea>
+            </label>
+
+            <label class="switch-row">
+                <span><strong>Enable reminder & alarm</strong><small>Notify me at the scheduled time</small></span>
+                <input type="checkbox" id="activityReminder" checked>
+            </label>
+
+            <label class="switch-row">
+                <span><strong>Repeat daily</strong><small>Repeat this activity every day</small></span>
+                <input type="checkbox" id="activityRepeat">
+            </label>
+
+            <button class="primary-btn full-btn" type="submit" id="submitActivity">Save activity</button>
+        </form>
+    </div>
+</div>
+
+<div class="alarm-overlay" id="alarmOverlay">
+    <div class="alarm-card">
+        <div class="alarm-symbol">◷</div>
+        <span class="eyebrow">LIFESYNC REMINDER</span>
+        <h2 id="alarmName">Activity reminder</h2>
+        <p id="alarmDetails">It is time for your activity.</p>
+        <button class="primary-btn full-btn" id="dismissAlarm">Dismiss alarm</button>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="java.js"></script>
+</body>
+</html>

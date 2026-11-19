@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Life Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div>
+        <h1>My Daily Planner</h1>
+        <p>Plan your day. Stay healthy. Stay productive.</p>
+    </div>
+    <div class="date" id="currentDate"></div>
+</header>
+
+<main class="container">
+
+    <section class="welcome">
+        <h2>Good Day! 👋</h2>
+        <p>Let's make today healthy and productive.</p>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <span>📅</span>
+            <h3 id="totalTasks">0</h3>
+            <p>Total Activities</p>
+        </div>
+        <div class="stat-card">
+            <span>✅</span>
+            <h3 id="completedTasks">0</h3>
+            <p>Completed</p>
+        </div>
+        <div class="stat-card">
+            <span>💧</span>
+            <h3 id="waterCount">0</h3>
+            <p>Water Glasses</p>
+        </div>
+        <div class="stat-card">
+            <span>🏃</span>
+            <h3 id="exerciseCount">0</h3>
+            <p>Exercise Activities</p>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>➕ Add Daily Activity</h2>
+
+        <form id="taskForm">
+            <input type="text" id="taskName"
+                   placeholder="Enter activity name" required>
+
+            <select id="category" required>
+                <option value="Schedule">Daily Schedule</option>
+                <option value="Exercise">Exercise</option>
+                <option value="Food">Food</option>
+                <option value="Water">Water</option>
+            </select>
+
+            <input type="date" id="taskDate" required>
+            <input type="time" id="taskTime" required>
+
+            <select id="priority">
+                <option value="High">High Priority</option>
+                <option value="Medium" selected>Medium Priority</option>
+                <option value="Low">Low Priority</option>
+            </select>
+
